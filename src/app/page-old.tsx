@@ -13,34 +13,17 @@ import {
   Badge,
   SimpleGrid,
   useColorModeValue,
-  Avatar,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
+  Flex,
+  Stack,
 } from '@chakra-ui/react';
-import { FaSun, FaMoon, FaGithub, FaUser, FaRocket, FaSignOutAlt } from 'react-icons/fa';
-import { useSession, signIn, signOut } from 'next-auth/react';
-import Link from 'next/link';
+import { FaSun, FaMoon, FaGithub, FaUser, FaRocket } from 'react-icons/fa';
 
 export default function Home() {
   const { colorMode, toggleColorMode } = useColorMode();
-  const { data: session, status } = useSession();
-  
   const bgGradient = useColorModeValue(
     'linear(to-br, blue.50, purple.50)',
     'linear(to-br, gray.900, gray.800)'
   );
-
-  const handleAuthAction = () => {
-    if (session) {
-      // User is signed in, redirect to dashboard
-      window.location.href = '/dashboard';
-    } else {
-      // User is not signed in, redirect to sign in
-      signIn('github');
-    }
-  };
 
   return (
     <Box minH="100vh" bgGradient={bgGradient}>
@@ -57,36 +40,9 @@ export default function Home() {
               onClick={toggleColorMode}
               variant="ghost"
             />
-            
-            {status === 'loading' ? (
-              <Button isLoading variant="outline">
-                جاري التحميل...
-              </Button>
-            ) : session ? (
-              <Menu>
-                <MenuButton as={Button} variant="ghost">
-                  <HStack spacing={2}>
-                    <Avatar size="sm" src={session.user?.image || ''} />
-                    <Text>{session.user?.name}</Text>
-                  </HStack>
-                </MenuButton>
-                <MenuList>
-                  <MenuItem as={Link} href="/dashboard" icon={<FaUser />}>
-                    لوحة التحكم
-                  </MenuItem>
-                  <MenuItem 
-                    icon={<FaSignOutAlt />} 
-                    onClick={() => signOut()}
-                  >
-                    تسجيل الخروج
-                  </MenuItem>
-                </MenuList>
-              </Menu>
-            ) : (
-              <Button leftIcon={<FaGithub />} variant="outline" onClick={() => signIn('github')}>
-                تسجيل الدخول
-              </Button>
-            )}
+            <Button leftIcon={<FaGithub />} variant="outline">
+              Sign in with GitHub
+            </Button>
           </HStack>
         </HStack>
       </Container>
@@ -95,27 +51,26 @@ export default function Home() {
       <Container maxW="container.xl" py={20}>
         <VStack spacing={8} textAlign="center">
           <Badge colorScheme="purple" px={3} py={1} borderRadius="full">
-            🚀 Create Your Professional Portfolio for Any Field
+            🚀 Create Your Professional Portfolio
           </Badge>
           
           <Heading size="2xl" maxW="600px" lineHeight="1.2">
-            Build Your Professional Portfolio in Minutes
+            Build Beautiful Portfolios in{' '}
+            <Text as="span" color="brand.500">
+              Minutes
+            </Text>
           </Heading>
-          
-          <Text fontSize="xl" color="gray.600" maxW="500px">
-            Whether you're a designer, developer, marketer, engineer, or any other professional - 
-            create a stunning portfolio that showcases your work and expertise.
+
+          <Text fontSize="xl" maxW="500px" color="gray.600">
+            Create stunning, professional portfolios with our easy-to-use template.
+            Connect with GitHub, add your projects, and share your work with the world.
           </Text>
 
           <HStack spacing={4}>
-            <Button 
-              size="lg" 
-              leftIcon={<FaRocket />}
-              onClick={handleAuthAction}
-            >
-              {session ? 'Go to Dashboard' : 'Get Started'}
+            <Button size="lg" leftIcon={<FaRocket />}>
+              Get Started
             </Button>
-            <Button size="lg" variant="outline" leftIcon={<FaUser />} as={Link} href="/portfolio/demo">
+            <Button size="lg" variant="outline" leftIcon={<FaUser />}>
               View Demo
             </Button>
           </HStack>
@@ -142,10 +97,10 @@ export default function Home() {
                 <Box bg="brand.100" p={4} borderRadius="full">
                   <FaGithub size={32} color="#0087ff" />
                 </Box>
-                <Heading size="md">Easy Integration</Heading>
+                <Heading size="md">GitHub Integration</Heading>
                 <Text color="gray.600">
-                  Connect your GitHub, Behance, Dribbble, and other professional
-                  platforms to showcase your work effortlessly.
+                  Seamlessly connect with GitHub to showcase your repositories
+                  and contributions.
                 </Text>
               </VStack>
             </Box>
@@ -184,8 +139,8 @@ export default function Home() {
                 </Box>
                 <Heading size="md">Professional Design</Heading>
                 <Text color="gray.600">
-                  Beautiful, responsive templates designed for all professions - 
-                  from creative to corporate, academic to entrepreneurial.
+                  Beautiful, responsive templates that make you stand out
+                  to potential employers.
                 </Text>
               </VStack>
             </Box>
