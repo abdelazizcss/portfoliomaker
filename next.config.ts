@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
+  // swcMinify est obsolète dans Next.js 15.3.4
   images: {
     domains: ['avatars.githubusercontent.com', 'fmrwiezcomdmycnpyixs.supabase.co'],
     remotePatterns: [

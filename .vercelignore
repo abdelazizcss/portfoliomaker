@@ -1,0 +1,22 @@
+# Fichiers de test
+test*.js
+*test*.js
+
+# Fichiers de documentation
+*.md
+!README.md
+
+# Fichiers SQL
+*.sql
+
+# Fichiers de debug
+debug*.js
+*debug*.js
+
+# Fichiers backup
+*-backup*
+*-old*
+
+# Fichiers de vérification
+check*.js
+*check*.js
