@@ -1,0 +1,10 @@
+# Ignorer tous les fichiers pour le déploiement initial
+src/**/*.ts
+src/**/*.tsx
+src/**/*.js
+src/**/*.jsx
+**/page-backup.tsx
+**/page-modern.tsx
+**/page-new.tsx
+**/page-professional.tsx
+**/page-old.tsx
